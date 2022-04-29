@@ -2,19 +2,33 @@
 const express = require('express')
 const path = require('path')
 
+
 // server initialization
 const app = express()
-//port
+
+// setings
 const PORT= 4000
 
+//middlewares
+app.use(express.json())
+app.use(express.static(path.join(__dirname, 'static', 'index.html')))
 
 
 // routes
-app.get('/', (req,res)=>{
-  return res.sendFile(path.join(__dirname, 'static', 'index.html'))
-})
+const users = require('./routes/users.routes')
+app.use(users)
+
 
 // server listening
 app.listen(4000, ()=>{
   console.log('listening on http://localhost:'+PORT)
 })
+
+
+
+/*
+
+- pensar en cuales serian las rutas
+-
+
+*/
